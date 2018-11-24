@@ -1,128 +1,166 @@
 view: wodonga_valves {
 sql_table_name:public.ctsfieldmousedata;;
 
-  dimension: Value{
-    label: "Meter Values"
+  dimension: a1 {
+    group_label: "Analogs"
     type: number
-    sql: ${TABLE}.v1 ;;
+    sql: ${TABLE}.a1 ;;
   }
 
-  dimension_group: reading {
-    type: time
-    timeframes: [raw, date, time_of_day,month,time, hour_of_day,hour12,hour3,hour6]
-    sql: cast(TIMESTAMPTZ(${TABLE}.t1) as timestamp);;
+  dimension: a2 {
+    group_label: "Analogs"
+    type: number
+    sql: ${TABLE}.a2 ;;
   }
 
-  dimension_group: reading_8am {
-    description: "A date starts from 8am of that day and ends before 8am of the following day."
-    type: time
-    timeframes: [date, hour, week, month, year]
-    sql: DATEADD(hour,-8,${reading_raw}) ;;
+  dimension: a3 {
+    group_label: "Analogs"
+    type: number
+    sql: ${TABLE}.a3 ;;
+  }
+
+  dimension: a4 {
+    group_label: "Analogs"
+    type: number
+    sql: ${TABLE}.a4 ;;
+  }
+
+  dimension: d1 {
+    group_label: "Digital"
+    type: number
+    sql: ${TABLE}.d1 ;;
+  }
+
+  dimension: d2 {
+    group_label: "Digital"
+    type: number
+    sql: ${TABLE}.d2 ;;
+  }
+
+  dimension: r1 {
+    group_label: "Relays"
+    type: number
+    sql: ${TABLE}.r1 ;;
+  }
+
+  dimension: r2 {
+    group_label: "Relays"
+    type: number
+    sql: ${TABLE}.r2 ;;
+  }
+
+  dimension: r3 {
+    group_label: "Relays"
+    type: number
+    sql: ${TABLE}.r3 ;;
+  }
+
+  dimension: r4 {
+    group_label: "Relays"
+    type: number
+    sql: ${TABLE}.r4 ;;
+  }
+
+  dimension: sid {
+    label: "Site ID"
+    type: number
+    value_format_name: id
+    sql: ${TABLE}.sid;;
+  }
+
+  dimension: cid {
+    label: "Customer ID"
+    type: number
+    value_format_name: id
+    sql: ${TABLE}.cid ;;
+  }
+
+  dimension: site_name {
+    type: string
+    hidden: no
+    sql: REPLACE(${sid},'3','Coogee Amen') ;;
+  }
+
+  dimension: date {
+    label: "date"
+    hidden: yes
+    type: date
+    sql: ${TABLE}.t1 ;;
   }
 
   dimension_group: t1 {
     type: time
-    timeframes: [raw, date, time, hour,month,week,year]
-    sql: cast(TIMESTAMPTZ(${TABLE}.t1) as timestamp) ;;
-    drill_fields: [t1_hour, t1_time,t1_month,t1_week,t1_year]
+    timeframes: [raw, hour_of_day, day_of_week, time_of_day, date]
+    sql: ${TABLE}t1 ;;
   }
 
-  dimension: name {
-    label: "Long Name"
-    type: string
-    sql: ${TABLE}.name ;;
+  dimension_group: timestamp {
+    type:time
+    timeframes: [raw, time, time_of_day, hour, date, week, month]
+    sql: TIMESTAMPTZ(${TABLE}.timestamp);;
   }
 
-  dimension: area {
-    type: string
-    sql: split_part(${name}, '.', 2) ;;
-  }
-
-  dimension: device {
-    type: string
-    sql: split_part(${name}, '.', 3) ;;
-  }
-
-  dimension:  application {
-    type: string
-    sql: split_part(${name}, '.', 5) ;;
-  }
-
-  dimension:  location {
-    label: "Lights Location"
-    type: string
-    sql: split_part(${name}, '.',4 ) ;;
-  }
-
-  dimension:  MWM_decon {
-    type: string
-    sql: split_part(${name}, '.',4 ) ;;
-  }
-
-  dimension: MWM{
-    type: string
-    sql: split_part(${MWM_decon}, ' ',1) ;;
-  }
-
-
-
-### FieldUnits.Albert St 1.Meters.ALBE FM.Accumulator
-### FieldUnits.Albert St 1.Meters.ALBE FM.Flow
-### FieldUnits.Alex Pump.Meters.MWM BTHS DRV ALEX PMP.Flow
-
-  dimension: lat {
-    type: number
-    sql: ${TABLE}.lat ;;
-  }
-
-  dimension: long {
-    type: number
-    sql: ${TABLE}.long ;;
-  }
-
-
-  dimension: t1 {
-    label: "Date and Time"
-    type: string
-    sql: cast(TIMESTAMPTZ(${TABLE}.t1) as timestamp) ;;
-  }
-
-  dimension: time_numeric {
-    label: "time numeric"
-    type: date_time_of_day
-
-  }
-
-
-  dimension: v1 {
-    hidden: yes
-    type: number
-    sql: ${TABLE}.v1 ;;
-  }
-
-  # dimension: dim.val {
-  #   type: number
-  #   sql: ${TABLE}.v1 ;;
+  ##dimension_group: timestamp {
+  ## type: time
+  ##convert_tz: yes
+  ##timeframes: [raw, time, time_of_day, date, hour, week, month, minute30  ]
+  ##sql: convert_timezone('AEDT','AEDT', ${TABLE}.timestamp::timestamp);;
   # }
 
 
+#   2017.11.14 AD at 13:31:28 AEDT
 
-  measure: min_value{
-    label: "Min Reading"
-    type: min
-    sql: ${v1} ;;
-    value_format: "0.000"
-  }
-
-  measure: max_value{
-    label: "Max Reading"
+  measure: d1_max {
     type: max
-    sql: ${v1} ;;
-    value_format: "0.000"
+    sql: ${d1} ;;
   }
 
-  measure: length_of_time {
-    type: date_time
-    sql: ${t1} ;;
+  measure: d2_max {
+    type: max
+    sql: ${d2} ;;
+  }
+  measure: count {
+    type: count
+    drill_fields: []
+  }
+
+  measure: average_value_a1 {
+    type: average
+    sql: ${a1} ;;
+  }
+
+  measure: average_value_a2 {
+    type: average
+    sql: ${a2} ;;
+  }
+
+  measure: average_value_a3 {
+    type: average
+    sql: ${a3} ;;
+  }
+
+  measure: average_value_a4 {
+    type: average
+    sql: ${a4} ;;
+  }
+
+  measure: max_value_a1 {
+    type: max
+    sql: ${a1} ;;
+  }
+
+  measure: max_value_a2 {
+    type: max
+    sql: ${a2} ;;
+  }
+
+  measure: max_value_a3 {
+    type: max
+    sql: ${a3} ;;
+  }
+
+  measure: max_value_a4 {
+    type: max
+    sql: ${a4} ;;
   }
 }
