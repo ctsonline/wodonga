@@ -1,5 +1,5 @@
 view: wodonga_valves {
-sql_table_name:public.ctsfieldmousedata;;
+  sql_table_name: public.ctsfieldmousedata ;;
 
   dimension: a1 {
     group_label: "Analogs"
@@ -23,6 +23,13 @@ sql_table_name:public.ctsfieldmousedata;;
     group_label: "Analogs"
     type: number
     sql: ${TABLE}.a4 ;;
+  }
+
+  dimension: cid {
+    label: "Customer ID"
+    type: number
+    value_format_name: id
+    sql: ${TABLE}.cid ;;
   }
 
   dimension: d1 {
@@ -65,60 +72,22 @@ sql_table_name:public.ctsfieldmousedata;;
     label: "Site ID"
     type: number
     value_format_name: id
-    sql: ${TABLE}.sid;;
-  }
-
-  dimension: cid {
-    label: "Customer ID"
-    type: number
-    value_format_name: id
-    sql: ${TABLE}.cid ;;
-  }
-
-  dimension: site_name {
-    type: string
-    hidden: no
-    sql: REPLACE(${sid},'3','Coogee Amen') ;;
-  }
-
-  dimension: date {
-    label: "date"
-    hidden: yes
-    type: date
-    sql: ${TABLE}.t1 ;;
-  }
-
-  dimension_group: t1 {
-    type: time
-    timeframes: [raw, hour_of_day, day_of_week, time_of_day, date]
-    sql: ${TABLE}t1 ;;
+    sql: ${TABLE}.sid ;;
   }
 
   dimension_group: timestamp {
-    type:time
-    timeframes: [raw, time, time_of_day, hour, date, week, month]
+    type: time
+    timeframes: [raw, time, time_of_day, date, week, month, hour_of_day, hour, hour3, minute, minute10]
     sql: TIMESTAMPTZ(${TABLE}.timestamp);;
+    drill_fields: [timestamp_date,timestamp_hour,timestamp_week]
   }
 
-  ##dimension_group: timestamp {
-  ## type: time
-  ##convert_tz: yes
-  ##timeframes: [raw, time, time_of_day, date, hour, week, month, minute30  ]
-  ##sql: convert_timezone('AEDT','AEDT', ${TABLE}.timestamp::timestamp);;
-  # }
+
+
 
 
 #   2017.11.14 AD at 13:31:28 AEDT
 
-  measure: d1_max {
-    type: max
-    sql: ${d1} ;;
-  }
-
-  measure: d2_max {
-    type: max
-    sql: ${d2} ;;
-  }
   measure: count {
     type: count
     drill_fields: []
@@ -127,6 +96,11 @@ sql_table_name:public.ctsfieldmousedata;;
   measure: average_value_a1 {
     type: average
     sql: ${a1} ;;
+  }
+
+  measure: max_value_a1 {
+    type:  max
+    sql:  ${a1} ;;
   }
 
   measure: average_value_a2 {
@@ -139,28 +113,14 @@ sql_table_name:public.ctsfieldmousedata;;
     sql: ${a3} ;;
   }
 
-  measure: average_value_a4 {
-    type: average
-    sql: ${a4} ;;
-  }
-
-  measure: max_value_a1 {
-    type: max
-    sql: ${a1} ;;
-  }
-
-  measure: max_value_a2 {
-    type: max
-    sql: ${a2} ;;
-  }
-
   measure: max_value_a3 {
     type: max
     sql: ${a3} ;;
   }
 
-  measure: max_value_a4 {
-    type: max
+  measure: average_value_a4 {
+    type: average
     sql: ${a4} ;;
   }
+
 }
