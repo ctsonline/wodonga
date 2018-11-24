@@ -9,3 +9,7 @@ datagroup: wodonga_city_council_default_datagroup {
 }
 
 persist_with: wodonga_city_council_default_datagroup
+
+explore: wodonga_valves {
+  label: "Wodonga Valves"
+}

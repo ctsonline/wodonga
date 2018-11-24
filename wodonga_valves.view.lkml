@@ -93,12 +93,6 @@ sql_table_name:public.ctsfieldmousedata;;
 
   }
 
-  dimension: time_8am_8am {
-    label: "time 8am - 8am"
-    type:string
-    sql:(trunc_days(${centpark_bores.reading_time}) = add_days(-1,trunc_days(now())) AND extract_hours(${centpark_bores.reading_time}) >= 8) OR
-      (trunc_days(${centpark_bores.reading_time}) = trunc_days(now()) AND extract_hours(${centpark_bores.reading_time}) < 8);;
-  }
 
   dimension: v1 {
     hidden: yes
