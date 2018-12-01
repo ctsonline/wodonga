@@ -28,3 +28,7 @@ datagroup: wodonga_valves_default_datagroup {
 explore: wodonga_valves {
   label: "Wodonga Valves"
 }
+
+explore: wodonga_lights {
+  label: "Wodonga Lights"
+}
