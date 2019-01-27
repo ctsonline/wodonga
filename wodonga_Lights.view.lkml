@@ -1,4 +1,5 @@
 view: wodonga_lights {
+  view_label: "Wodonga Lights"
  sql_table_name:ctsfieldmousedata ;;
 
   dimension: a1 {

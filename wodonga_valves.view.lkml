@@ -1,4 +1,5 @@
 view: wodonga_valves {
+  view_label: "Wodonga Valves"
    sql_table_name:ctsfieldmousedata ;;
 
   dimension: a1 {
