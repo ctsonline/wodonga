@@ -8,10 +8,6 @@ datagroup: wodong_default_datagroup {
   max_cache_age: "1 hour"
 }
 
-explore: wodonga_lights {
-  label: "Wodonga Lights"
-}
-
 explore: wodonga_valves {
   label: "Wodonga Valves"
 }
