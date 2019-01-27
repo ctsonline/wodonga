@@ -1,5 +1,5 @@
 view: wodonga_valves {
-  sql_table_name: public.ctsfieldmousedata ;;
+  sql_table_name:ctsfieldmousedata ;;
 
   dimension: a1 {
     group_label: "Analogs"
