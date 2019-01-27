@@ -1,6 +1,6 @@
-view: wodonga_valves {
+view: wodonga_valves{
   view_label: "Wodonga Valves"
-   sql_table_name:public.ctsfieldmousedata ;;
+   sql_table_name:ctsfieldmousedata ;;
 
   dimension: a1 {
     group_label: "Analogs"
