@@ -89,7 +89,26 @@ view: wodonga_lights {
 
 #   2017.11.14 AD at 13:31:28 AEDT
 
-  measure: count {
+
+measure: average_value_r1 {
+  label: "kelly Lights 1"
+  type: average
+  sql: ${r1} ;;
+}
+
+  measure: average_value_r2 {
+    label: "kelly Lights 2"
+    type: average
+    sql: ${r2} ;;
+  }
+
+  measure: average_value_r3 {
+    label: "kelly Lights 3"
+    type: average
+    sql: ${r3} ;;
+  }
+
+ measure: count {
     type: count
     drill_fields: []
   }
