@@ -90,21 +90,21 @@ view: wodonga_lights {
 #   2017.11.14 AD at 13:31:28 AEDT
 
 
-measure: average_value_r1 {
+measure: max_value_r1 {
   label: "kelly Lights 1"
-  type: average
+  type: max
   sql: ${r1} ;;
 }
 
-  measure: average_value_r2 {
+  measure: max_value_r2 {
     label: "kelly Lights 2"
-    type: average
+    type:max
     sql: ${r2} ;;
   }
 
-  measure: average_value_r3 {
+  measure: max_value_r3 {
     label: "kelly Lights 3"
-    type: average
+    type: max
     sql: ${r3} ;;
   }
 
